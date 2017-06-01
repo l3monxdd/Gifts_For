@@ -16,7 +16,6 @@
 <div style=" text-align: center; margin-top: 3%" >
 	<a href="/registration">Registration</a>
 	<a href="/suitofdelivery">Suitofdelivery</a>
-	<a href="/orders">orders</a>
 	<a href="/measuringsystem">MeasuringSystem</a>
 	<a href="/commodity">Commodity</a>
 	<a href="/address">Address</a>
