@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="flower_shop@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.2">
+    <root id="1"/>
+    <schema id="2" parent="1" name="flower_shop">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="gifts_for"/>
+    <schema id="4" parent="1" name="gifts_for_pleasure"/>
+    <schema id="5" parent="1" name="information_schema"/>
+    <schema id="6" parent="1" name="mysql"/>
+    <schema id="7" parent="1" name="performance_schema"/>
+    <table id="8" parent="2" name="Address"/>
+    <table id="9" parent="2" name="Commodity"/>
+    <table id="10" parent="2" name="MeasuringSystem"/>
+    <table id="11" parent="2" name="Orders"/>
+    <table id="12" parent="2" name="SuitOfDelivery"/>
+    <table id="13" parent="2" name="User"/>
+    <table id="14" parent="2" name="commodity_measuring_system"/>
+    <table id="15" parent="2" name="orders_commodity"/>
+    <column id="16" parent="8" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="17" parent="8" name="floor">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="18" parent="8" name="number_of_apartament">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="19" parent="8" name="number_of_build">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="20" parent="8" name="street">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="21" parent="8" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="22" parent="9" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="23" parent="9" name="bonus_money">
+      <Position>2</Position>
+      <DataType>double|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="24" parent="9" name="counter">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="25" parent="9" name="name_of_commodity">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="26" parent="9" name="price_id_uan">
+      <Position>5</Position>
+      <DataType>double|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="27" parent="9" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="28" parent="10" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="29" parent="10" name="name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="30" parent="10" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="31" parent="11" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="32" parent="11" name="date">
+      <Position>2</Position>
+      <DataType>date|0</DataType>
+    </column>
+    <column id="33" parent="11" name="description">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="34" parent="11" name="address_id">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="35" parent="11" name="delivery_id">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="36" parent="11" name="user_id">
+      <Position>6</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <index id="37" parent="11" name="FKh8hmfrkfgpd8lf9c3ffw0mi55">
+      <ColNames>delivery_id</ColNames>
+    </index>
+    <index id="38" parent="11" name="FKky1pbb8qo6fa1hg5m5tmcb962">
+      <ColNames>address_id</ColNames>
+    </index>
+    <index id="39" parent="11" name="FKsgwj42spshwc3eestq5vk520j">
+      <ColNames>user_id</ColNames>
+    </index>
+    <key id="40" parent="11" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="41" parent="11" name="FKky1pbb8qo6fa1hg5m5tmcb962">
+      <ColNames>address_id</ColNames>
+      <RefSchemaName>flower_shop</RefSchemaName>
+      <RefTableName>Address</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="42" parent="11" name="FKh8hmfrkfgpd8lf9c3ffw0mi55">
+      <ColNames>delivery_id</ColNames>
+      <RefSchemaName>flower_shop</RefSchemaName>
+      <RefTableName>SuitOfDelivery</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="43" parent="11" name="FKsgwj42spshwc3eestq5vk520j">
+      <ColNames>user_id</ColNames>
+      <RefSchemaName>flower_shop</RefSchemaName>
+      <RefTableName>User</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="44" parent="12" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="45" parent="12" name="name_of_suit">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="46" parent="12" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="47" parent="13" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="48" parent="13" name="email">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="49" parent="13" name="name">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="50" parent="13" name="password">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="51" parent="13" name="phone_number">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="52" parent="13" name="username">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="53" parent="13" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="54" parent="14" name="measuring_system_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="55" parent="14" name="commodity_id">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="56" parent="14" name="FK4fhiv5wua4ia7olyvvkmtdn03">
+      <ColNames>measuring_system_id</ColNames>
+    </index>
+    <index id="57" parent="14" name="FK5fixcsb3oh2bqhug59jtnopcu">
+      <ColNames>commodity_id</ColNames>
+    </index>
+    <foreign-key id="58" parent="14" name="FK4fhiv5wua4ia7olyvvkmtdn03">
+      <ColNames>measuring_system_id</ColNames>
+      <RefSchemaName>flower_shop</RefSchemaName>
+      <RefTableName>MeasuringSystem</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="59" parent="14" name="FK5fixcsb3oh2bqhug59jtnopcu">
+      <ColNames>commodity_id</ColNames>
+      <RefSchemaName>flower_shop</RefSchemaName>
+      <RefTableName>Commodity</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="60" parent="15" name="orders_id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="61" parent="15" name="commodity_id">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="62" parent="15" name="FK1pni31c5ilfdy6p6dfbl5gbr9">
+      <ColNames>orders_id</ColNames>
+    </index>
+    <index id="63" parent="15" name="FKpgb4uahyojclx35seleitucng">
+      <ColNames>commodity_id</ColNames>
+    </index>
+    <foreign-key id="64" parent="15" name="FK1pni31c5ilfdy6p6dfbl5gbr9">
+      <ColNames>orders_id</ColNames>
+      <RefSchemaName>flower_shop</RefSchemaName>
+      <RefTableName>Commodity</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="65" parent="15" name="FKpgb4uahyojclx35seleitucng">
+      <ColNames>commodity_id</ColNames>
+      <RefSchemaName>flower_shop</RefSchemaName>
+      <RefTableName>Orders</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+  </database-model>
+</dataSource>
