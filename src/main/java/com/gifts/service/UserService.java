@@ -1,5 +1,6 @@
 package com.gifts.service;
 
+import java.security.Principal;
 import java.util.List;
 
 import com.gifts.entity.User;
@@ -13,5 +14,13 @@ public interface UserService {
 	void update(User user);
 	User findByName(String name);
 	User findByEmail(String email);
+
+//	void like(Principal principal, int commodityId);
+
+	User findUserWithCommodity(int id);
+
+	User findByUuid(String uuid);
+
+
 
 }

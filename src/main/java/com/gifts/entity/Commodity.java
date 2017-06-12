@@ -34,16 +34,42 @@ public class Commodity {
 			inverseJoinColumns = @JoinColumn(name = "measuring_system_id"))
 	private List<MeasuringSystem> measuringSystems = new ArrayList<MeasuringSystem>();
 
+	@ManyToMany
+	@JoinTable(name = "user_commodity",
+			joinColumns = @JoinColumn(name = "commodity_id"),
+			inverseJoinColumns = @JoinColumn(name = "user_id"))
+	private List<User> users = new ArrayList<User>();
+
 	public Commodity() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Commodity(String name_of_commodity, int counter, double price_id_uan) {
+
+	public Commodity(int id, String name_of_commodity, double price_id_uan) {
 		super();
+		this.id = id;
 		this.name_of_commodity = name_of_commodity;
-		this.counter = counter;
 		this.price_id_uan = price_id_uan;
 
+	}
+
+
+
+	public Commodity(String name_of_commodity) {
+		this.name_of_commodity = name_of_commodity;
+	}
+
+
+
+
+
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 
 	public int getId() {
@@ -85,6 +111,7 @@ public class Commodity {
 	public void setOrders(List<Orders> orders) {
 		this.orders = orders;
 	}
+
 
 	public List<MeasuringSystem> getMeasuringSystems() {
 		return measuringSystems;

@@ -8,7 +8,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-	<link rel="stylesheet" href="/css/address.css" type="text/css">
+	<link rel="stylesheet" href="/css/commodity.css" type="text/css">
+
 </head>
 <body>
 
@@ -33,6 +34,7 @@
 	</form:form>
 
 
+
 	<%--<form action="/commodity" method="post">--%>
 
 		<%--<input name="name_of_commodity" type="text" placeholder="name_of_commodity">--%>
@@ -53,17 +55,41 @@
 	<%--</form>--%>
 
 
-	<ol>
 		<c:forEach var="commodity" items="${commodities}">
+			<div class="block3">
 			<li>${commodity.name_of_commodity} ${commodity.counter} ${commodity.price_id_uan}
-			<c:forEach var="ms" items="${commodity.measuringSystems}">
-				${ms.name}
-			</c:forEach>
+
+				<c:forEach var="ms" items="${commodity.measuringSystems}">
+					${ms.name}
+				</c:forEach>
+
 				<a href="/deleteCommodity/${commodity.id}">delete</a>
 				<a href="/updateCommodity/${commodity.id}">update</a>
 			</li>
+			</div>
 		</c:forEach>
-	</ol>
+
+
+
+
+
+
+
+
+
+	<%--<ol>--%>
+
+		<%--<c:forEach var="commodity" items="${commodities}">--%>
+			<%--<li>${commodity.name_of_commodity} ${commodity.counter} ${commodity.price_id_uan}--%>
+			<%--<c:forEach var="ms" items="${commodity.measuringSystems}">--%>
+				<%--${ms.name}--%>
+			<%--</c:forEach>--%>
+				<%--<a href="/deleteCommodity/${commodity.id}">delete</a>--%>
+				<%--<a href="/updateCommodity/${commodity.id}">update</a>--%>
+			<%--</li>--%>
+		<%--</c:forEach>--%>
+
+	<%--</ol>--%>
 		
 </body>
 </html>

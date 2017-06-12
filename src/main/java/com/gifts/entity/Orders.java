@@ -3,6 +3,7 @@ package com.gifts.entity;
 import org.hibernate.annotations.Type;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.*;
@@ -36,13 +37,18 @@ public class Orders {
 		// TODO Auto-generated constructor stub
 	}
 
-	
+	public Orders(LocalDate date) {
+		this.date = date;
+	}
 
 	public Orders(String description, LocalDate date) {
 		super();
 		this.description = description;
 		this.date = date;
 	}
+
+
+
 
 
 

@@ -1,5 +1,6 @@
 package com.gifts.controller;
 
+import com.gifts.service.MailSenderService;
 import com.gifts.validator.UserValidator.UserValidatorMessages;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,11 +10,17 @@ import org.springframework.web.bind.annotation.*;
 import com.gifts.entity.User;
 import com.gifts.service.UserService;
 
+import java.security.Principal;
+import java.util.UUID;
+
 @Controller
 public class UserController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private MailSenderService mailSenderService;
 
 	@GetMapping("/registration")
 	public String registration(Model model) {
@@ -24,6 +31,13 @@ public class UserController {
 
 	@PostMapping("/registration")
 	public String registration(@ModelAttribute User user, Model model) {
+
+//		System.out.println("user = " + user);
+
+		String uuid = UUID.randomUUID().toString();
+
+		user.setUuid(uuid);
+
 		try {
 			userService.save(user);
 		} catch (Exception e){
@@ -39,6 +53,12 @@ public class UserController {
 			return "registration";
 		}
 
+		String theme = "thank's for registration";
+		String mailBody =
+				"gl & hf       http://localhost:8080/confirm/" + uuid;
+
+		mailSenderService.sendMail(theme, mailBody, user.getEmail());
+
 		return "redirect:/registration";
 	}
 
@@ -46,6 +66,37 @@ public class UserController {
 	public String deleteuser(@PathVariable int id) {
 		userService.delete(id);
 		return "redirect:/registration";
+	}
+
+	@PostMapping("/logout")
+	public String logout(){
+		return "redirect:/";
+	}
+
+	@GetMapping("/profile")
+	public String profile(Principal principal, Model model){
+		model.addAttribute("user", userService.findUserWithCommodity(Integer.parseInt(principal.getName())));
+		return "profile";
+	}
+
+//	@GetMapping("/buy/{id}")
+//	public  String like (Principal principal, @PathVariable int id){
+//
+//
+////		userService.like(principal, id);
+//
+//		return "redirect:/";
+//	}
+
+	@GetMapping("/confirm/{uuid}")
+	public String confirm(@PathVariable String uuid) {
+
+		User user = userService.findByUuid(uuid);
+		user.setEnable(true);
+
+		userService.update(user);
+
+		return "redirect:/";
 	}
 
 }

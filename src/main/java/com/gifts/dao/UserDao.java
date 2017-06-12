@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.gifts.entity.User;
+import org.springframework.data.repository.query.Param;
 
 public interface UserDao extends JpaRepository<User, Integer> {
 
@@ -21,9 +22,17 @@ public interface UserDao extends JpaRepository<User, Integer> {
 	User findUserWithOrders(int id);// знаходимо всі замовлення юзера по id
 
 
+
+
+
 	User findByLogin(String name);
 
 	User findByEmail(String email);
 
+	@Query("select u from User u left join fetch u.commodities where u.id=:id")
+	User findUserWithCommodity(@Param("id") int id);
 
+
+	@Query("select  u from  User u where  u.uuid =:uuid")
+	User findByUuid(@Param("uuid") String uuid);
 }
