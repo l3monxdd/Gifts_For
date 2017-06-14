@@ -7,6 +7,8 @@ import com.gifts.entity.MeasuringSystem;
 import com.gifts.validator.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.gifts.dao.CommodityDao;
@@ -67,5 +69,15 @@ public class CommodityServiceImpl implements CommodityService {
 	@Override
 	public Commodity findByName_of_commodity(String name_of_commodity) {
 		return commodityDao.findByName_of_commodity(name_of_commodity);
+	}
+
+	@Override
+	public Page<Commodity> findAll(Pageable pageable) {
+		return commodityDao.findAll(pageable);
+	}
+
+	@Override
+	public Page<Commodity> commodityWithMeasuringSystemPages(Pageable pageable) {
+		return commodityDao.commodityWithMeasuringSystemPages(pageable);
 	}
 }

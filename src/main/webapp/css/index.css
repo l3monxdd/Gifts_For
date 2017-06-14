@@ -1,7 +1,202 @@
 .block3 {
     width: 582px;
     height: 144px;
-    background-color: #ff4313;
+    background-color: #85C3E9;
     float: left;
     margin: 5px
 }
+
+@import url(https://fonts.googleapis.com/css?family=Varela+Round);
+body{
+    zoom:1;
+}
+.nav-list{
+    list-style:none;
+}
+
+.nav-list a{
+    text-decoration:none;
+    transition:color 0.3s ease-out;
+    color:inherit;
+}
+
+.nav-list li{
+    position:relative;
+    display:inline-block;
+    margin:5px;
+    letter-spacing:-1px;
+}
+
+
+.registration:after,
+.registration:before,
+.registration a:after,
+.registration a:before{
+    background-color:#CEDD3E;
+}
+
+.registration:hover{
+    color:#CEDD3E
+}
+
+.suitofdelivery:after,
+.suitofdelivery:before,
+.suitofdelivery a:after,
+.suitofdelivery a:before{
+    background-color:#F27132;
+}
+
+.suitofdelivery:hover{
+    color:#F27132;
+}
+
+.measuringsystem:after,
+.measuringsystem:before,
+.measuringsystem a:after,
+.measuringsystem a:before{
+    background-color:#85C3E9;
+}
+
+.measuringsystem:hover{
+    color:#85C3E9;
+}
+
+.commodity:after,
+.commodity:before,
+.commodity a:after,
+.commodity a:before{
+    background-color:#FDBE2A;
+}
+
+.commodity:hover{
+    color:#FDBE2A;
+}
+
+.address:after,
+.address:before,
+.address a:after,
+.address a:before{
+    background-color:#76b852;
+}
+
+.address:hover{
+    color:#76b852;
+}
+
+.profile:after,
+.profile:before,
+.profile a:after,
+.profile a:before{
+    background-color:#000000;
+}
+
+.profile:hover{
+    color:#000000;
+}
+
+.au1:after,
+.au1:before,
+.au1 a:after,
+.au1 a:before{
+    background-color:#f6ea40;
+}
+
+.au1:hover{
+    color:#f6ea40;
+}
+
+.logout:after,
+.logout:before,
+.logout a:after,
+.logout a:before{
+    background-color:#f2f2f2;
+}
+
+.logout:hover{
+    color:#f2f2f2;
+}
+
+
+.nav-list li:after,
+.nav-list li:before,
+.nav-list  a:before,
+.nav-list  a:after{
+    position:absolute;
+    content:'';
+    border-radius:4px;
+}
+
+.nav-list li:after,
+.nav-list li:before{
+    bottom:-4px;
+    height:4px;
+}
+
+.nav-list li:not(.selected):before{
+    left:0;
+    right:-2px;
+}
+
+.nav-list li.selected:after{
+    left:0;
+    right:39px;
+}
+
+.nav-list li.selected:before{
+    right:-2px;
+    width:13px;
+}
+
+
+.nav-list .selected a:before{
+    height:22px;
+    width:4px;
+    bottom:-22px;
+    right:7px;
+}
+
+.nav-list .selected a:after{
+    height:4px;
+    width:40px;
+    bottom:-13px;
+    right:5px;
+    transform:rotate(30deg);
+}
+
+/* Booring stuff*/
+
+body{
+    font-family: 'Varela Round', sans-serif;
+}
+
+.wrapper{
+    width:500px;
+    margin:0 auto;
+}
+
+h1{
+    text-align:center;
+    padding-bottom:.5em;
+}
+
+footer{
+    margin-top:5em;
+    float:right;
+    font-size:.7em;
+}
+
+
+footer a{
+    color:#79B1D4;
+    text-decoration:none;
+}
+
+footer a:hover{
+    border-bottom:1px solid black;
+}
+
+.red{
+    color:#F27132;
+}
+
+

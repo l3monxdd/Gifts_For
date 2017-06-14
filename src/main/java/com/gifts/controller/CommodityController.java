@@ -3,12 +3,16 @@ package com.gifts.controller;
 import com.gifts.service.MeasuringSystemService;
 import com.gifts.validator.CommodityValidator.CommodityValidatorMessages;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.gifts.entity.Commodity;
 import com.gifts.service.CommodityService;
+
+import java.security.Principal;
 
 @Controller
 public class CommodityController {
@@ -19,16 +23,27 @@ public class CommodityController {
 	private MeasuringSystemService measuringSystemService;
 
 	@GetMapping("/commodity")
-	public String commodity(Model model){
+	public String commodity(Model model, @PageableDefault Pageable pageable){
 		model.addAttribute("commodities", commodityService.commoditywithMeasuringSystem());
+		model.addAttribute("commodities", commodityService.commodityWithMeasuringSystemPages(pageable));
 		model.addAttribute("measuringSystems", measuringSystemService.findAll());
 		model.addAttribute("commodity", new Commodity());
 		return "commodity";
 	}
 
+
+//	@GetMapping("/commodity")
+//	public String commodity(Model model, Principal principal, @PageableDefault Pageable pageable) {
+//		model.addAttribute("commodities", commodityService.commodityWithMeasuringSystemPages(pageable));
+//			return "/commodity";
+//	}
+
+
+
 	@PostMapping("/commodity")
 	public String commodity(@ModelAttribute Commodity commodity,
-							@RequestParam int ms, Model model){
+							@RequestParam int ms, Model model, @PageableDefault Pageable pageable){
+		model.addAttribute("commodities", commodityService.commodityWithMeasuringSystemPages(pageable));
 		try {
 			commodityService.save(commodity, ms);
 		}catch (Exception e){
@@ -43,6 +58,10 @@ public class CommodityController {
 
 		return "redirect:/commodity";
 	}
+
+
+
+
 
 	@GetMapping("/deleteCommodity/{id}")
 	public String deleteCommodity(@PathVariable int id){
@@ -62,6 +81,13 @@ public class CommodityController {
 		model.addAttribute("commodity",commodity);
 
 		return "updateCommodity";
+	}
+
+	@GetMapping("/show")
+	public String show(Model model
+	){
+		model.addAttribute("commodities",  commodityService.findAll());
+		return "commodity";
 	}
 
 }

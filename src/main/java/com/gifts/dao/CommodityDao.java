@@ -1,5 +1,7 @@
 package com.gifts.dao;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.gifts.entity.Commodity;
@@ -17,6 +19,12 @@ public interface CommodityDao extends JpaRepository<Commodity, Integer> {
 
     @Query("select i from Commodity i where i.name_of_commodity =:name")
     Commodity findByName_of_commodity (@Param("name") String name);
+
+
+    @Query(value = "select distinct d from Commodity d left join fetch d.measuringSystems",
+            countQuery = "select count(d.id) from Commodity d")
+    Page<Commodity> commodityWithMeasuringSystemPages(Pageable pageable);
+
 
 
 

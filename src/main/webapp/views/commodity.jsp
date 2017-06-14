@@ -55,7 +55,7 @@
 	<%--</form>--%>
 
 
-		<c:forEach var="commodity" items="${commodities}">
+		<c:forEach var="commodity" items="${commodities.content}">
 			<div class="block3">
 			<li>${commodity.name_of_commodity} ${commodity.counter} ${commodity.price_id_uan}
 
@@ -70,26 +70,9 @@
 		</c:forEach>
 
 
+	<a href="/commodity/?page=${commodities.number}&size=${commodities.size}">previous</a>
+	<a href="/commodity/?page=${commodities.number+ 2}&size=${commodities.size}">next</a>
 
-
-
-
-
-
-
-	<%--<ol>--%>
-
-		<%--<c:forEach var="commodity" items="${commodities}">--%>
-			<%--<li>${commodity.name_of_commodity} ${commodity.counter} ${commodity.price_id_uan}--%>
-			<%--<c:forEach var="ms" items="${commodity.measuringSystems}">--%>
-				<%--${ms.name}--%>
-			<%--</c:forEach>--%>
-				<%--<a href="/deleteCommodity/${commodity.id}">delete</a>--%>
-				<%--<a href="/updateCommodity/${commodity.id}">update</a>--%>
-			<%--</li>--%>
-		<%--</c:forEach>--%>
-
-	<%--</ol>--%>
 		
 </body>
 </html>
