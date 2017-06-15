@@ -59,7 +59,7 @@
 </div>
 
 
-<c:forEach var="commodity" items="${commodities}">
+<c:forEach var="commodity" items="${commodities.content}">
 	<form>
 	<div class="block3" style="text-align:  center">
 		<li>${commodity.name_of_commodity} ${commodity.counter} ${commodity.price_id_uan}
@@ -77,6 +77,9 @@
 	</div>
 	</form>
 </c:forEach>
+
+<a href="/?page=${commodities.number}&size=${commodities.size}">previous</a>
+<a href="/?page=${commodities.number+ 2}&size=${commodities.size}">next</a>
 
 
 

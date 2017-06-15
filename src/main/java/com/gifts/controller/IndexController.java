@@ -2,6 +2,8 @@ package com.gifts.controller;
 
 import com.gifts.service.CommodityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,8 +16,9 @@ public class IndexController {
 
 
 	@GetMapping("/")
-	public String index(Model model) {
+	public String index(Model model, @PageableDefault Pageable pageable) {
 		model.addAttribute("commodities", commodityService.commoditywithMeasuringSystem());
+		model.addAttribute("commodities", commodityService.commodityWithMeasuringSystemPages(pageable));
 		return "index";
 	}
 

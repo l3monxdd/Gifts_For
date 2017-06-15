@@ -20,115 +20,117 @@
 
 
 
-
 <body>
 
-<%--<div class="login-page">--%>
-    <%--<div class="form">--%>
-        <%--<form:form modelAttribute="user" action="/registration" method="post" class="register-form">--%>
-        <%--<span style="color: #e74c3c; text-align: center" >${loginException}</span>--%>
-            <%--<span style="color: #e74c3c; text-align: center" >${emailException}</span>--%>
-            <%--<form:input path="login" placeholder="login"/>--%>
-            <%--<form:input path="firstname" placeholder="firstname"/>--%>
-            <%--<form:input path="lastname" placeholder="lastname"/>--%>
-            <%--<form:input path="email" placeholder="email"/>--%>
-            <%--<form:input path="password" placeholder="password"/>--%>
-            <%--<form:input path="phone_number"  placeholder="phone_number"/>--%>
-            <%--<button>create</button>--%>
-            <%--<p class="message">Already registered? <a href="#">Sign In</a></p>--%>
-        <%--</form:form>--%>
-        <%--<form class="login-form">--%>
-            <%--<input type="text" placeholder="username"/>--%>
-            <%--<input type="password" placeholder="password"/>--%>
-            <%--<button>login</button>--%>
-            <%--<p class="message">Not registered? <a href="#">Create an account</a></p>--%>
-        <%--</form>--%>
-    <%--</div>--%>
-<%--</div>--%>
+<div class="form-wrap">
+    <div class="tabs">
+        <h3 class="signup-tab"><a class="active" href="#signup-tab-content">Sign Up</a></h3>
+        <h3 class="login-tab"><a href="#login-tab-content">Login</a></h3>
+    </div><!--.tabs-->
 
-<!-- multistep form -->
-    <%--<form:form modelAttribute="user" action="/registration" method="post"  id="msform">--%>
+    <div class="tabs-content">
+        <div id="signup-tab-content" class="active">
+            <form:form modelAttribute="user" class="signup-form" method="post">
+                <h3 style="text-align: center;color: red">${loginException}</h3>
+                <form:input path="login" type="text" class="input"  autocomplete="off"
+                            placeholder="login"></form:input>
 
-    <!-- progressbar -->
+                <form:input path="firstname" type="text" class="input"  autocomplete="off"
+                            placeholder="firstname"></form:input>
 
-    <!-- fieldsets -->
-    <%--<fieldset>--%>
-        <%--<h2 class="fs-title">Create your account</h2>--%>
-        <%--&lt;%&ndash;<input type="text" name="email" placeholder="Email" />&ndash;%&gt;--%>
-        <%--&lt;%&ndash;<input type="password" name="pass" placeholder="Password" />&ndash;%&gt;--%>
-        <%--&lt;%&ndash;<input type="password" name="cpass" placeholder="Confirm Password" />&ndash;%&gt;--%>
-        <%--<span style="color: #e74c3c; text-align: center" >${loginException}</span>--%>
-        <%--<span style="color: #e74c3c; text-align: center" >${emailException}</span>--%>
-        <%--<form:input path="login" placeholder="login"/>--%>
-        <%--<form:input path="firstname" placeholder="firstname"/>--%>
-        <%--<form:input path="lastname" placeholder="lastname"/>--%>
-        <%--<form:input path="email" placeholder="email"/>--%>
-        <%--<form:input path="password" placeholder="password"/>--%>
-        <%--<form:input path="phone_number"  placeholder="phone_number"/>--%>
-        <%--<input type="submit" name="next" class="next action-button" value="save" />--%>
-        <%--&lt;%&ndash;<button>save user</button>&ndash;%&gt;--%>
+                <form:input path="lastname" type="text" class="input"  autocomplete="off"
+                            placeholder="lastname"/>
+                <h3 style="text-align: center;color: red">${emailException}</h3>
+                <form:input path="email" type="text" class="input" id="user_email" autocomplete="off"
+                            placeholder="Email"/>
+
+                <form:input path="password" type="password" class="input" id="user_pass" autocomplete="off"
+                            placeholder="Password"/>
+
+                <form:input path="phone_number" type="text" class="input"  autocomplete="off"
+                            placeholder="phone_number"/>
+
+                <input type="submit" class="button" value="Sign Up">
 
 
-    <%--</fieldset>--%>
-    <%--</form:form>--%>
+            </form:form><!--.login-form-->
+        </div><!--.signup-tab-content-->
+
+        <div id="login-tab-content">
+            <form:form class="login-form" action="/login" method="post">
+                <input name="username" type="text" class="input" id="user_login" autocomplete="off" placeholder="Username">
+                <input name="password" type="password" class="input" id="user_pass" autocomplete="off" placeholder="Password">
+
+                <input type="submit" class="button" value="Login">
+            </form:form>
+        </div
+    </div>
+</div>
+
+
+
+
+
 
 
 
 <%--/////////////////////////////////////////////--%>
 
 
-<form:form modelAttribute="user" action="/registration" method="post">
+<%--<form:form modelAttribute="user" action="/registration" method="post">--%>
 
 
-    <span style="color: #e74c3c; text-align: center" >${loginException}</span>
-    <span style="color: #e74c3c; text-align: center" >${emailException}</span>
+    <%--<span style="color: #e74c3c; text-align: center" >${loginException}</span>--%>
+    <%--<span style="color: #e74c3c; text-align: center" >${emailException}</span>--%>
 
-    <br><form:input path="login" placeholder="login"/>
-    <br><form:input path="firstname" placeholder="firstname"/>
-    <br><form:input path="lastname" placeholder="lastname"/>
-        <br><form:input path="email" placeholder="email"/>
-        <br><form:input path="password" placeholder="password"/>
-        <br><form:input path="phone_number"  placeholder="phone_number"/>
+    <%--<br><form:input path="login" placeholder="login"/>--%>
+    <%--<br><form:input path="firstname" placeholder="firstname"/>--%>
+    <%--<br><form:input path="lastname" placeholder="lastname"/>--%>
+        <%--<br><form:input path="email" placeholder="email"/>--%>
+        <%--<br><form:input path="password" placeholder="password"/>--%>
+        <%--<br><form:input path="phone_number"  placeholder="phone_number"/>--%>
 
-        <br><button>save user</button>
-
-
-
-</form:form>
-
-<form:form class="login-form" action="/login" method="post">
-    <input name="username" type="text" class="input" id="user_login" autocomplete="off" placeholder="Username">
-    <input name="password" type="password" class="input" id="user_pass" autocomplete="off" placeholder="Password">
-    <input type="submit" class="button" value="Login">
-</form:form><!--.login-form-->
-
-
-<table style="border:  1px solid black">
-    <tr>
-        <th style="border:  1px solid black">login</th>
-        <th style="border:  1px solid black">firstname</th>
-        <th style="border:  1px solid black">lastname</th>
-        <th style="border:  1px solid black">email</th>
-        <th style="border:  1px solid black">password</th>
-        <th style="border:  1px solid black">phone_number</th>
-        <th style="border:  1px solid black">delete</th>
-
-
-        <c:forEach var="u" items="${users}">
-    <tr>
-        <th style="border:  1px solid black"> ${u.login}</th>
-        <th style="border:  1px solid black"> ${u.firstname}</th>
-        <th style="border:  1px solid black"> ${u.lastname}</th>
-        <th style="border:  1px solid black"> ${u.email}</th>
-        <th style="border:  1px solid black"> ${u.password}</th>
-        <th style="border:  1px solid black"> ${u.phone_number}</th>
-        <th style="border:  1px solid black"> <a href="/deleteUser/${u.id }">delete</a></th>
-    </tr>
-    </c:forEach>
-    </tr>
+        <%--<br><button>save user</button>--%>
 
 
 
-</table>
+<%--</form:form>--%>
+
+<%--<form:form class="login-form" action="/login" method="post">--%>
+    <%--<input name="username" type="text" class="input" id="user_login" autocomplete="off" placeholder="Username">--%>
+    <%--<input name="password" type="password" class="input" id="user_pass" autocomplete="off" placeholder="Password">--%>
+    <%--<input type="submit" class="button" value="Login">--%>
+<%--</form:form><!--.login-form-->--%>
+
+
+
+<%--/////////////////////////////delete form///////////////////////////////--%>
+
+
+<%--<table style="border:  1px solid black">--%>
+    <%--<tr>--%>
+        <%--<th style="border:  1px solid black">login</th>--%>
+        <%--<th style="border:  1px solid black">firstname</th>--%>
+        <%--<th style="border:  1px solid black">lastname</th>--%>
+        <%--<th style="border:  1px solid black">email</th>--%>
+        <%--<th style="border:  1px solid black">password</th>--%>
+        <%--<th style="border:  1px solid black">phone_number</th>--%>
+        <%--<th style="border:  1px solid black">delete</th>--%>
+
+
+        <%--<c:forEach var="u" items="${users}">--%>
+    <%--<tr>--%>
+        <%--<th style="border:  1px solid black"> ${u.login}</th>--%>
+        <%--<th style="border:  1px solid black"> ${u.firstname}</th>--%>
+        <%--<th style="border:  1px solid black"> ${u.lastname}</th>--%>
+        <%--<th style="border:  1px solid black"> ${u.email}</th>--%>
+        <%--<th style="border:  1px solid black"> ${u.password}</th>--%>
+        <%--<th style="border:  1px solid black"> ${u.phone_number}</th>--%>
+        <%--<th style="border:  1px solid black"> <a href="/deleteUser/${u.id }">delete</a></th>--%>
+    <%--</tr>--%>
+    <%--</c:forEach>--%>
+<%--</table>--%>
+
+
 </body>
 </html>
