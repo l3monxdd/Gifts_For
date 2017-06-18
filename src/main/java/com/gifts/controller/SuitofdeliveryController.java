@@ -70,7 +70,6 @@ public class SuitofdeliveryController {
 										@RequestParam String name,
 										@RequestParam MultipartFile image){
 
-
 		SuitOfDelivery suitOfDelivery = new SuitOfDelivery(name);
 		suitOfDelivery.setId(suitId);
 
