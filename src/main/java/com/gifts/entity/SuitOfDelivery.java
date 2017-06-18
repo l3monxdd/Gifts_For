@@ -14,6 +14,8 @@ public class SuitOfDelivery {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String name;
+
+	private String pathImage;
 	
 	@OneToMany(mappedBy="delivery")
 	private List<Orders> orders;
@@ -50,9 +52,12 @@ public class SuitOfDelivery {
 	public void setOrders(List<Orders> orders) {
 		this.orders = orders;
 	}
-	
-	
-	
-	
 
+	public String getPathImage() {
+		return pathImage;
+	}
+
+	public void setPathImage(String pathImage) {
+		this.pathImage = pathImage;
+	}
 }
