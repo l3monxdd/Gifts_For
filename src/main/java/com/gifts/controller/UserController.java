@@ -30,7 +30,7 @@ public class UserController {
 	public String registration(Model model) {
 		model.addAttribute("users", userService.findAll());
 		model.addAttribute("user", new User());
-		return "registration";
+		return "views-user-registration";
 	}
 
 	@PostMapping("/registration")
@@ -54,7 +54,7 @@ public class UserController {
 				model.addAttribute("emailException", e.getMessage());
 			}
 
-			return "registration";
+			return "views-user-registration";
 		}
 
 		String theme = "thank's for registration";
@@ -63,7 +63,7 @@ public class UserController {
 
 		mailSenderService.sendMail(theme, mailBody, user.getEmail());
 
-		return "redirect:/registration";
+		return "redirect:/";
 	}
 
 	@GetMapping("/deleteUser/{id}")
@@ -81,7 +81,7 @@ public class UserController {
 	public String profile(Principal principal, Model model){
 		model.addAttribute("user", userService.findUserWithCommodity(Integer.parseInt(principal.getName())));
 		model.addAttribute("suit_of_delivery", suitOfDeliveryService.findAll());
-		return "profile";
+		return "views-user-profile";
 	}
 
 //	@GetMapping("/buy/{id}")

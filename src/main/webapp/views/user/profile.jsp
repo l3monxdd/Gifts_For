@@ -8,11 +8,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
     pfofile
 
 ${user}
 <br>
-<c:forEach var="com" items="${user.commodities}">
+<c:forEach  var="com" items="${user.commodities}">
     ${com.name_of_commodity}
     <a href="/deleteFromBasket/${user.id}/${com.id}">delete</a>
     <br>
@@ -31,6 +32,8 @@ ${user}
         <input name="town" type="text" placeholder="town"/>
     <br>
         <input name="description" type="text" placeholder="description"/>
+
+
 
     <select name="suit">
         <c:forEach var="suit_of" items="${suit_of_delivery}">

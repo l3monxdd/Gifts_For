@@ -12,9 +12,9 @@
 </head>
 <body>
 
-    <form action="/updateMeasuringSystem/${currentMeasuringSystem.id}" method="post">
+    <form action="/updateMeasuringSystem/${currentMeasuringSystem.id}?${_csrf.parameterName}=${_csrf.token}" method="post">
         <input type="text" name="name" value="${currentMeasuringSystem.name}">
-        <button>update measuring system"</button>
+        <button>update measuring system</button>
     </form>
 
 </body>

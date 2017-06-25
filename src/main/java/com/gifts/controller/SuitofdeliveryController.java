@@ -25,7 +25,7 @@ public class SuitofdeliveryController {
 
 		model.addAttribute("suitofdelivery", new SuitOfDelivery());
 
-		return "suitofdelivery";
+		return "views-admin-suitofdelivery";
 	}
 
 	@PostMapping("/suitofdelivery")
@@ -40,7 +40,7 @@ public class SuitofdeliveryController {
 
 				model.addAttribute("suitException", e.getMessage());
 			}
-			return "suitofdelivery";
+			return "views-admin-suitofdelivery";
 		}
 
 		return "redirect:/suitofdelivery";
@@ -62,7 +62,7 @@ public class SuitofdeliveryController {
 		model.addAttribute("suitofdelivery", suitOfDeliveryService.findOne(suitId));
 
 
-		return "updateSuitOfDelivery";
+		return "views-admin-updateSuitOfDelivery";
 	}
 
 	@PostMapping("/updateSuitOfDelivery/{suitId}")

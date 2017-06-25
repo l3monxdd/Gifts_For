@@ -19,7 +19,7 @@ public class IndexController {
 	public String index(Model model, @PageableDefault Pageable pageable) {
 
 		model.addAttribute("commodities", commodityService.commodityWithMeasuringSystemPages(pageable));
-		return "index";
+		return "views-base-index";
 	}
 
 
@@ -27,6 +27,6 @@ public class IndexController {
 	public String indexAfterLogin(Model model, @PageableDefault Pageable pageable) {
 		model.addAttribute("commodities", commodityService.commodityWithMeasuringSystemPages(pageable));
 
-		return "index";
+		return "views-base-index";
 	}
 }

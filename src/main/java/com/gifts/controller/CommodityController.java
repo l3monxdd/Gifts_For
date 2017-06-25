@@ -28,7 +28,7 @@ public class CommodityController {
 	public String commodity(Model model, @PageableDefault Pageable pageable){
 		model.addAttribute("commodities", commodityService.commodityWithMeasuringSystemPages(pageable));
 		model.addAttribute("measuringSystems", measuringSystemService.findAll());
-		return "commodity";
+		return "views-admin-commodity";
 	}
 
 	@PostMapping("/commodity")
@@ -51,7 +51,7 @@ public class CommodityController {
 			}
 
 			model.addAttribute("measuringSystems", measuringSystemService.findAll());
-			return "commodity";
+			return "views-admin-commodity";
 		}
 
 
@@ -81,7 +81,7 @@ public class CommodityController {
 		model.addAttribute("commodity",commodity);
 		model.addAttribute("measuringSystems", measuringSystemService.findAll());
 
-		return "updateCommodity";
+		return "views-admin-updateCommodity";
 	}
 
 
@@ -110,7 +110,7 @@ public class CommodityController {
 	public String show(Model model
 	){
 		model.addAttribute("commodities",  commodityService.findAll());
-		return "commodity";
+		return "views-admin-commodity";
 	}
 
 }

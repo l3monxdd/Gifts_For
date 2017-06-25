@@ -19,7 +19,7 @@ public class MeasuringsystemController {
 	public String measuringsystem(Model model) {
 		model.addAttribute("measuringsystems", measuringSystemService.findAll());
 		model.addAttribute("measuringSystem", new MeasuringSystem());
-		return "measuringsystem";
+		return "views-admin-measuringsystem";
 	}
 
 //	@PostMapping("/measuringsystem")
@@ -39,7 +39,7 @@ public class MeasuringsystemController {
 				model.addAttribute("measuringSystemException", e.getMessage());
 			}
 
-			return "measuringsystem";
+			return "views-admin-measuringsystem";
 
 		}
 
@@ -58,7 +58,7 @@ public class MeasuringsystemController {
 
 		model.addAttribute("currentMeasuringSystem", measuringSystem);
 
-		return "updateMeasuringSystem";
+		return "views-admin-updateMeasuringSystem";
 	}
 
 	@PostMapping("/updateMeasuringSystem/{id}")
