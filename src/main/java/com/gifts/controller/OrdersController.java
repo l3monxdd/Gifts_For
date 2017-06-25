@@ -1,5 +1,7 @@
 package com.gifts.controller;
 
+import com.gifts.entity.Address;
+import com.gifts.service.AddressService;
 import com.gifts.service.OrdersService;
 import com.gifts.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 
@@ -21,6 +24,9 @@ public class OrdersController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private AddressService addressService;
 
     @GetMapping("/addIntoBasket/{id}")
     public String addIntoBasket( Principal principal, @PathVariable int id){
@@ -41,9 +47,15 @@ public class OrdersController {
     }
 //
     @PostMapping("/buy/{userId}")
-    public String buy (@PathVariable int userId){
+    public String buy (@PathVariable int userId, @RequestParam String street, @RequestParam String number_of_build,
+                       @RequestParam String number_of_apartament, @RequestParam String town, @RequestParam int suit,
+                       @RequestParam String description) throws Exception {
 
-        ordersService.buy(userId);
+        Address address = new Address(street, number_of_build, number_of_apartament, town);
+
+
+
+        ordersService.buy(userId, address, suit, description);
 
         return "redirect:/profile";
     }

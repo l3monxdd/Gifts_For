@@ -2,18 +2,13 @@ package com.gifts.serviceImpl;
 
 import java.security.Principal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
-import com.gifts.dao.CommodityDao;
-import com.gifts.dao.UserDao;
-import com.gifts.entity.Commodity;
-import com.gifts.entity.User;
+import com.gifts.dao.*;
+import com.gifts.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.gifts.dao.OrdersDao;
-import com.gifts.entity.Orders;
 import com.gifts.service.OrdersService;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,8 +21,12 @@ public class OrdersServiceImpl implements OrdersService {
 	private CommodityDao commodityDao;
 	@Autowired
 	private UserDao userDao;
+	@Autowired
+	private AddressDao addressDao;
+	@Autowired
+	private SuitOfDeliveryDao suitOfDeliveryDao;
 
-	public void save(Orders orders) {
+	public void save(Orders orders, Address address) {
 		ordersDao.save(orders);
 	}
 
@@ -76,18 +75,33 @@ public class OrdersServiceImpl implements OrdersService {
 
 	@Override
 	@Transactional
-	public void buy(int userId) {
+	public void buy(int userId, Address address, int suit, String description) {
 
 		Orders orders = new Orders(LocalDate.now());
 
 
+
+
 //		Orders orders = new Orders();
+
+		addressDao.saveAndFlush(address);
 
 		ordersDao.saveAndFlush(orders);
 
+
+		orders.setAddress(address);
+
+
 		User user = userDao.findUserWithCommodity(userId);
 
+		SuitOfDelivery suitOfDelivery = suitOfDeliveryDao.findOne(suit);
+
 		orders.setUser(user);
+
+		orders.setDelivery(suitOfDelivery);
+
+		orders.setDescription(description);
+
 
 			for (Commodity commodity : user.getCommodities()) {
 

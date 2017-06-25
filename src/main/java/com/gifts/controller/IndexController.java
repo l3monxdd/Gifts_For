@@ -17,14 +17,16 @@ public class IndexController {
 
 	@GetMapping("/")
 	public String index(Model model, @PageableDefault Pageable pageable) {
-		model.addAttribute("commodities", commodityService.commoditywithMeasuringSystem());
+
 		model.addAttribute("commodities", commodityService.commodityWithMeasuringSystemPages(pageable));
 		return "index";
 	}
 
 
 	@PostMapping("/")
-	public String indexAfterLogin() {
+	public String indexAfterLogin(Model model, @PageableDefault Pageable pageable) {
+		model.addAttribute("commodities", commodityService.commodityWithMeasuringSystemPages(pageable));
+
 		return "index";
 	}
 }

@@ -3,13 +3,7 @@ package com.gifts.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 
 @Entity
 public class Commodity {
@@ -22,17 +16,16 @@ public class Commodity {
 	private int quantity; // кількість на складі
 	private double price_id_uan;
 
+	private String pathImage;
+
 	@ManyToMany
 	@JoinTable(name = "orders_commodity",
 			joinColumns = @JoinColumn(name = "commodity_id"),
 			inverseJoinColumns = @JoinColumn(name = "orders_id"))
-	private List<Orders> orders;
+	private List<Orders> orders = new ArrayList<>();
 
-	@ManyToMany
-	@JoinTable(name = "commodity_measuring_system",
-			joinColumns = @JoinColumn(name = "commodity_id"),
-			inverseJoinColumns = @JoinColumn(name = "measuring_system_id"))
-	private List<MeasuringSystem> measuringSystems = new ArrayList<MeasuringSystem>();
+	@ManyToOne
+	private MeasuringSystem measuringSystem;
 
 	@ManyToMany
 	@JoinTable(name = "user_commodity",
@@ -53,16 +46,24 @@ public class Commodity {
 
 	}
 
-
+	public Commodity(String name_of_commodity, int quantity, double price_id_uan) {
+		this.name_of_commodity = name_of_commodity;
+		this.quantity = quantity;
+		this.price_id_uan = price_id_uan;
+	}
 
 	public Commodity(String name_of_commodity) {
 		this.name_of_commodity = name_of_commodity;
 	}
 
 
+	public String getPathImage() {
+		return pathImage;
+	}
 
-
-
+	public void setPathImage(String pathImage) {
+		this.pathImage = pathImage;
+	}
 
 	public List<User> getUsers() {
 		return users;
@@ -113,12 +114,12 @@ public class Commodity {
 	}
 
 
-	public List<MeasuringSystem> getMeasuringSystems() {
-		return measuringSystems;
+	public MeasuringSystem getMeasuringSystem() {
+		return measuringSystem;
 	}
 
-	public void setMeasuringSystems(List<MeasuringSystem> measuringSystems) {
-		this.measuringSystems = measuringSystems;
+	public void setMeasuringSystem(MeasuringSystem measuringSystem) {
+		this.measuringSystem = measuringSystem;
 	}
 
 	public int getQuantity() {

@@ -14,8 +14,7 @@ public class MeasuringSystem {
 
 	private String name;
 
-	@ManyToMany(cascade = CascadeType.REMOVE)
-	@JoinTable(name = "commodity_measuring_system", joinColumns = @JoinColumn(name = "measuring_system_id"), inverseJoinColumns = @JoinColumn(name = "commodity_id"))
+	@OneToMany(mappedBy = "measuringSystem")
 	private List<Commodity> commodities = new ArrayList<Commodity>();
 
 	public MeasuringSystem() {
@@ -49,5 +48,14 @@ public class MeasuringSystem {
 
 	public void setCommodities(List<Commodity> commodities) {
 		this.commodities = commodities;
+	}
+
+
+	@Override
+	public String toString() {
+		return "MeasuringSystem{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				'}';
 	}
 }

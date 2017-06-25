@@ -137,12 +137,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 //          user.getCommodities().get(i).getRecipe()))
 		}
 
-		int counter = 0;
-		for (Commodity commodity : user.getCommodities()) {
-			returnedUser.getCommodities().get(counter).setMeasuringSystems(commodityDao.
-                    findCommoditiesWithMeasuringSystem(commodity.getId()).getMeasuringSystems());
-			counter++;
-		}
+//		int counter = 0;
+//		for (Commodity commodity : user.getCommodities()) {
+//			returnedUser.getCommodities().get(counter).setMeasuringSystems(commodityDao.
+//                    findCommoditiesWithMeasuringSystem(commodity.getId()).getMeasuringSystems());
+//			counter++;
+//		}
 
 		return returnedUser;
 

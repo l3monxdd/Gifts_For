@@ -17,7 +17,8 @@ public class Address {
 	private String street;
 	private String number_of_build;
 	private String number_of_apartament;
-	private int floor;
+	private String town;
+
 	
 	@OneToMany(mappedBy="address")
 	private List<Orders> orders;
@@ -26,12 +27,21 @@ public class Address {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Address(String street, String number_of_build, String number_of_apartament, int floor) {
-		super();
+
+	public Address(String street, String number_of_build, String number_of_apartament, String town) {
 		this.street = street;
 		this.number_of_build = number_of_build;
 		this.number_of_apartament = number_of_apartament;
-		this.floor = floor;
+		this.town = town;
+
+	}
+
+	public String getTown() {
+		return town;
+	}
+
+	public void setTown(String town) {
+		this.town = town;
 	}
 
 	public int getId() {
@@ -66,14 +76,7 @@ public class Address {
 		this.number_of_apartament = number_of_apartament;
 	}
 
-	public int getFloor() {
-		return floor;
-	}
 
-	public void setFloor(int floor) {
-		this.floor = floor;
-	}
-	
 	
 	
 	

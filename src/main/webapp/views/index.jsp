@@ -3,6 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -31,12 +32,12 @@
 	<h1>Navigation</h1>
 	<ul class="nav-list">
 		<sec:authorize access="!isAuthenticated()">
-		<li  class="registration"><a href="/registration">SignIn/Registration</a></li>
+		<li  class="registration"><a href="/registration"><spring:message code="label.registration"/></a></li>
 		</sec:authorize>
 		<sec:authorize access="hasAnyRole('ROLE_ADMIN')">
-		<li class="commodity"><a href="/commodity">commodity</a></li>
-		<li class="measuringsystem"><a href="/measuringsystem">measuringsystem</a></li>
-		<li class="suitofdelivery"><a href="/suitofdelivery">Suitofdelivery</a></li>
+		<li class="commodity"><a href="/commodity"><spring:message code="label.commodity"/></a></li>
+		<li class="measuringsystem"><a href="/measuringsystem"><spring:message code="label.measuringsystem"/></a></li>
+		<li class="suitofdelivery"><a href="/suitofdelivery"><spring:message code="label.suitofdelivery"/></a></li>
 		<li class="address"><a href="/address">address</a> </li>
 		</sec:authorize>
 		<li class="au1">
@@ -47,14 +48,25 @@
 		<li class="logout">
 			<sec:authorize access="isAuthenticated()">
 			<form:form action="/logout" method="post">
-				<button class="btn btn-default">logout</button>
+				<button class="btn btn-default"><spring:message code="label.logout"/></button>
 			</form:form>
 			</sec:authorize>
 		</li>
 
 		<sec:authorize access="isAuthenticated()">
-			<li class="profile"><a href="/profile">Your Profile</a> </li>
+			<li class="profile"><a href="/profile"><spring:message code="label.profile"/></a> </li>
 		</sec:authorize>
+
+		<li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown" role="button"
+			   aria-haspopup="true" aria-expanded="false">
+				<spring:message code="label.lang"/> <span class="caret"></span>
+				<ul class="dropdown-menu">
+					<li><a href="?lang=ua">ua</a></li>
+					<li><a href="?lang=en">en</a></li>
+				</ul>
+			</a>
+		</li>
 	</ul>
 </div>
 
@@ -67,6 +79,7 @@
 				<%--<c:forEach var="ms" items="${commodity.measuringSystems}">--%>
 				<%--${ms.name}--%>
 				<%--</c:forEach>--%>
+			<img src="${commodity.pathImage}" alt="" width="15%" height="30%">
 			<sec:authorize access="hasAnyRole('ROLE_USER')">
 				<td>
 					<a href="/addIntoBasket/${commodity.id}">basket</a>

@@ -11,7 +11,8 @@
                              authentication-success-forward-url="/"/>
 
         <security:logout logout-url="/logout" logout-success-url="/"/>
-        <security:intercept-url pattern="/country" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/commodity/**" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/updateCommodity/**" access="hasRole('ROLE_ADMIN')"/>
 
     </security:http>
 

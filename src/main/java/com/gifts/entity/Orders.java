@@ -4,6 +4,7 @@ import org.hibernate.annotations.Type;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -25,7 +26,7 @@ public class Orders {
 	@JoinTable(name="orders_commodity",
 	joinColumns=@JoinColumn(name="orders_id"),
 	inverseJoinColumns=@JoinColumn(name="commodity_id"))
-	private List<Commodity> commodities;
+	private List<Commodity> commodities = new ArrayList<>();
 	
 	@ManyToOne
 	private Address address;

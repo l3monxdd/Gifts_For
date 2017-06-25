@@ -1,5 +1,6 @@
 package com.gifts.validator.CommodityValidator;
 
+import com.gifts.dao.CommodityDao;
 import com.gifts.entity.Commodity;
 import com.gifts.service.CommodityService;
 import com.gifts.validator.Validator;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Component;
 public class CommodityValidator implements Validator{
 
     @Autowired
-    private CommodityService commodityService;
+    private CommodityDao commodityDao;
 
     @Override
     public void validate(Object o) throws Exception {
@@ -23,7 +24,7 @@ public class CommodityValidator implements Validator{
 
         if (commodity.getName_of_commodity().isEmpty()){
             throw  new CommodityException(CommodityValidatorMessages.EMPTY_NAME_OF_COMMODITY_FIELD);
-        }else if (commodityService.findByName_of_commodity(commodity.getName_of_commodity()) !=null){
+        }else if (commodityDao.findByName_of_commodity(commodity.getName_of_commodity()) !=null){
             throw  new  CommodityException(CommodityValidatorMessages.NAME_OF_COMMODITY_ALREADY_EXIST);
         }
 

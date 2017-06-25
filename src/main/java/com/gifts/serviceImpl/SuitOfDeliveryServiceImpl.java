@@ -41,7 +41,8 @@ public class SuitOfDeliveryServiceImpl implements SuitOfDeliveryService {
 			filePath.mkdirs();
 			try {
 				FileUtils.cleanDirectory
-						(new File(System.getProperty("catalina.home")+ "/resources/"+ suitOfDelivery.getName() + "/"));
+						(new File(System.getProperty("catalina.home")+ "/resources/"
+								+ suitOfDelivery.getName() + "/"));
 			}catch (IOException e) {
 				e.printStackTrace();
 			}

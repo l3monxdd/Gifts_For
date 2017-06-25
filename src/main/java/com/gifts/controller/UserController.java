@@ -1,6 +1,7 @@
 package com.gifts.controller;
 
 import com.gifts.service.MailSenderService;
+import com.gifts.service.SuitOfDeliveryService;
 import com.gifts.validator.UserValidator.UserValidatorMessages;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,9 @@ public class UserController {
 
 	@Autowired
 	private MailSenderService mailSenderService;
+
+	@Autowired
+	private SuitOfDeliveryService suitOfDeliveryService;
 
 	@GetMapping("/registration")
 	public String registration(Model model) {
@@ -76,6 +80,7 @@ public class UserController {
 	@GetMapping("/profile")
 	public String profile(Principal principal, Model model){
 		model.addAttribute("user", userService.findUserWithCommodity(Integer.parseInt(principal.getName())));
+		model.addAttribute("suit_of_delivery", suitOfDeliveryService.findAll());
 		return "profile";
 	}
 

@@ -13,21 +13,19 @@
 </head>
 <body>
 
-	<form:form modelAttribute="commodity" action="/commodity" method="post">
+	<form:form action="/commodity?${_csrf.parameterName}=${_csrf.token}" method="post"
+			   enctype="multipart/form-data">
 
-		<span style="color: #e74c3c; text-align: center";>${commodityNameException}</span>
-		<form:input path="name_of_commodity" placeholder="name_of_commodity"/>
-		<form:input path="price_id_uan" placeholder="price_id_uan"/>
-		<form:input path="quantity" placeholder="counter"/>
-
-
-
-
-		<select name="ms">
-			<c:forEach var="ms" items="${measuringSystems}">
-				<option value="${ms.id}">${ms.name}</option>
-			</c:forEach>
-		</select>
+		<span style="color: #e74c3c; text-align: center">${commodityNameException}</span>
+			<input name="name_of_commodity" type="text" placeholder="name_of_commodity"/>
+			<input name="price_id_uan" type="text" placeholder="price_id_uan"/>
+			<input name="quantity" type="text" placeholder="quantity"/>
+			<input type="file" name="image" required="required"/>
+			<select name="ms" >
+				<c:forEach var="ms" items="${measuringSystems}">
+					<option  value="${ms.id}">${ms.name}</option>
+				</c:forEach>
+			</select>
 
 		<button>save commodity</button>
 
@@ -35,39 +33,25 @@
 
 
 
-	<%--<form action="/commodity" method="post">--%>
-
-		<%--<input name="name_of_commodity" type="text" placeholder="name_of_commodity">--%>
-		<%--<input name="counter" type="number" placeholder="counter">--%>
-		<%--<input name="price_id_uan" type="text" placeholder="price_id_uan">--%>
-		<%--<input name="bonus_money" type="text" placeholder="bonus_money">--%>
-
-
-
-		<%--<select name="ms">--%>
-			<%--<c:forEach var="ms" items="${measuringSystems}">--%>
-				<%--<option value="${ms.id}">${ms.name}</option>--%>
-			<%--</c:forEach>--%>
-		<%--</select>--%>
-
-		<%--<button>save commodity</button>--%>
-
-	<%--</form>--%>
-
-
-		<c:forEach var="commodity" items="${commodities.content}">
+		<c:forEach var="commodity" items	="${commodities.content}">
 			<div class="block3">
-			<li>${commodity.name_of_commodity} ${commodity.counter} ${commodity.price_id_uan}
+			<li>${commodity.name_of_commodity} ${commodity.quantity} ${commodity.price_id_uan}
+				<img src="/${commodity.pathImage}" alt="" width="10%" height="15%">
 
-				<c:forEach var="ms" items="${commodity.measuringSystems}">
-					${ms.name}
-				</c:forEach>
+
+				${commodity.measuringSystem.name}
+
 
 				<a href="/deleteCommodity/${commodity.id}">delete</a>
 				<a href="/updateCommodity/${commodity.id}">update</a>
 			</li>
 			</div>
 		</c:forEach>
+
+
+
+
+
 
 
 	<a href="/commodity/?page=${commodities.number}&size=${commodities.size}">previous</a>
