@@ -25,6 +25,8 @@ public interface CommodityDao extends JpaRepository<Commodity, Integer> {
             countQuery = "select count(d.id) from Commodity d")
     Page<Commodity> commodityWithMeasuringSystemPages(Pageable pageable);
 
+    @Query("select p from Commodity p where p.price_id_uan =:name")
+    Commodity findByPrice_id_uan (@Param("name") String name);
 
 
 

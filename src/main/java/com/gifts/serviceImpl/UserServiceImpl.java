@@ -125,12 +125,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		User returnedUser = new User();
 		returnedUser.setId(user.getId());
 		returnedUser.setLogin(user.getLogin());
+		returnedUser.setEmail(user.getEmail());
 
 		for (int i=0; i < user.getCommodities().size(); i++) {
 
 			returnedUser.getCommodities().add(new Commodity(user.getCommodities().get(i).getId(),
-					user.getCommodities().get(i).getName_of_commodity(), user.getCommodities().
-					get(i).getPrice_id_uan()));
+					user.getCommodities().get(i).getName_of_commodity(),
+					user.getCommodities().get(i).getQuantity(),
+					user.getCommodities().get(i).getPrice_id_uan()));
 
 //			returnedUser.getCommodities().add(new Commodity(user.getCommodities().get(i).getId(),
 //			user.getCommodities().get(i).getName_of_commodity(),
@@ -151,5 +153,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	@Override
 	public User findByUuid(String uuid) {
 		return userDao.findByUuid(uuid);
+	}
+
+	@Override
+	public User findUserByLoginWithCommodities(String login) {
+		return userDao.findUserByLoginWithCommodities(login);
 	}
 }

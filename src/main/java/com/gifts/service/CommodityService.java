@@ -28,4 +28,6 @@ public interface CommodityService {
 
 	Commodity findByName_of_commodity (String name_of_commodity);
 
+	Commodity findByPrice_id_uan (String price_id_uan);
+
 }

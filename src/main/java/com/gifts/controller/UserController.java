@@ -1,9 +1,13 @@
 package com.gifts.controller;
 
+import com.gifts.service.CommodityService;
 import com.gifts.service.MailSenderService;
 import com.gifts.service.SuitOfDeliveryService;
+import com.gifts.validator.UserValidator.UserLoginValidationMessages;
 import com.gifts.validator.UserValidator.UserValidatorMessages;
+import com.gifts.validator.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,10 +25,17 @@ public class UserController {
 	private UserService userService;
 
 	@Autowired
+	@Qualifier("userLoginValidator")
+	private Validator validator;
+
+	@Autowired
 	private MailSenderService mailSenderService;
 
 	@Autowired
 	private SuitOfDeliveryService suitOfDeliveryService;
+
+	@Autowired
+	private CommodityService commodityService;
 
 	@GetMapping("/registration")
 	public String registration(Model model) {
@@ -72,6 +83,24 @@ public class UserController {
 		return "redirect:/registration";
 	}
 
+	@PostMapping("/failureLogin")
+	public String failureLogin(Model model, @RequestParam String username,
+							   @RequestParam String password){
+
+		try {
+			validator.validate(new User(username,password));
+		} catch (Exception e) {
+			if(e.getMessage().equals(UserLoginValidationMessages.EMPTY_USERNAME_FIELD)||
+					e.getMessage().equals(UserLoginValidationMessages.EMPTY_PASSWORD_FIELD)||
+					e.getMessage().equals(UserLoginValidationMessages.WRONG_USERNAME_OR_PASSWORD)){
+				model.addAttribute("exception", e.getMessage());
+			}
+		}
+		model.addAttribute("user", new User());
+
+		return "views-user-registration";
+	}
+
 	@PostMapping("/logout")
 	public String logout(){
 		return "redirect:/";
@@ -79,8 +108,10 @@ public class UserController {
 
 	@GetMapping("/profile")
 	public String profile(Principal principal, Model model){
+		model.addAttribute("testuser", userService.findOne(Integer.parseInt(principal.getName()))); //
 		model.addAttribute("user", userService.findUserWithCommodity(Integer.parseInt(principal.getName())));
 		model.addAttribute("suit_of_delivery", suitOfDeliveryService.findAll());
+		model.addAttribute("commodities", commodityService.findAll());
 		return "views-user-profile";
 	}
 

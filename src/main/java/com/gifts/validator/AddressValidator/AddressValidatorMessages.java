@@ -7,4 +7,5 @@ public interface AddressValidatorMessages {
     String EMPTY_STREET_FIELD = "EMPTY_STREET_FIELD";
     String STREET_ALREADY_EXIST = "STREET_ALREADY_EXIST";
 
+
 }

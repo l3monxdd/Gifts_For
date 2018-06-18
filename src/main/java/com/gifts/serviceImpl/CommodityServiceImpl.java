@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.gifts.dao.MeasuringSystemDao;
+import com.gifts.entity.CommodityCounter;
 import com.gifts.entity.MeasuringSystem;
 import com.gifts.validator.Validator;
 import org.apache.commons.io.FileUtils;
@@ -26,6 +27,7 @@ public class CommodityServiceImpl implements CommodityService {
 
 	@Autowired
 	private CommodityDao commodityDao;
+
 
 	@Autowired
 	@Qualifier("commodityValidator")
@@ -115,6 +117,11 @@ public class CommodityServiceImpl implements CommodityService {
 	@Override
 	public Commodity findByName_of_commodity(String name_of_commodity) {
 		return commodityDao.findByName_of_commodity(name_of_commodity);
+	}
+
+	@Override
+	public Commodity findByPrice_id_uan(String price_id_uan) {
+		return commodityDao.findByPrice_id_uan(price_id_uan);
 	}
 
 	@Override

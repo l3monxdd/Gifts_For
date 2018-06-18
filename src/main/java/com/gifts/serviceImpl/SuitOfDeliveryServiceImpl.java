@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import com.gifts.dao.OrdersDao;
+import com.gifts.entity.Orders;
 import com.gifts.validator.Validator;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,9 @@ public class SuitOfDeliveryServiceImpl implements SuitOfDeliveryService {
 	@Autowired
 	@Qualifier("suitOfDeliveryValidator")
 	private Validator validator;
+
+	@Autowired
+	private OrdersDao ordersDao;
 
 	public void save(SuitOfDelivery suitOfDelivery, MultipartFile image) throws Exception {
 		validator.validate(suitOfDelivery);
@@ -63,6 +68,11 @@ public class SuitOfDeliveryServiceImpl implements SuitOfDeliveryService {
 	}
 
 	public void delete(int id) {
+		SuitOfDelivery suitOfDelivery = suitOfDeliveryDao.findSuitOfDeliveryWithOrders(id);
+		for (Orders orders : suitOfDelivery.getOrders()) {
+			orders.setDelivery(null);
+			ordersDao.save(orders);
+		}
 		suitOfDeliveryDao.delete(id);
 	}
 

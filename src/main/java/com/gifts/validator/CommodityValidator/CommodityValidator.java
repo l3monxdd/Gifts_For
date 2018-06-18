@@ -2,6 +2,7 @@ package com.gifts.validator.CommodityValidator;
 
 import com.gifts.dao.CommodityDao;
 import com.gifts.entity.Commodity;
+import com.gifts.entity.CommodityCounter;
 import com.gifts.service.CommodityService;
 import com.gifts.validator.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,5 @@ public class CommodityValidator implements Validator{
         }else if (commodityDao.findByName_of_commodity(commodity.getName_of_commodity()) !=null){
             throw  new  CommodityException(CommodityValidatorMessages.NAME_OF_COMMODITY_ALREADY_EXIST);
         }
-
     }
 }

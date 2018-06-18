@@ -6,7 +6,10 @@ import java.util.List;
 
 import com.gifts.dao.*;
 import com.gifts.entity.*;
+import com.gifts.validator.UserValidator.UserException;
+import com.gifts.validator.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.gifts.service.OrdersService;
@@ -25,6 +28,18 @@ public class OrdersServiceImpl implements OrdersService {
 	private AddressDao addressDao;
 	@Autowired
 	private SuitOfDeliveryDao suitOfDeliveryDao;
+
+	@Autowired
+	@Qualifier("profileValidator")
+	private Validator validator;
+
+	@Override
+	public void save(Orders orders) {
+		ordersDao.save(orders);
+	}
+
+	@Autowired
+	private CommodityCounterDao commodityCounterDao;
 
 	public void save(Orders orders, Address address) {
 		ordersDao.save(orders);
@@ -75,24 +90,26 @@ public class OrdersServiceImpl implements OrdersService {
 
 	@Override
 	@Transactional
-	public void buy(int userId, Address address, int suit, String description) {
+	public void buy(int userId, Address address, int suit, String description, List<Integer> counters) throws Exception {
+		validator.validate(address);
+
+		User user = userDao.findUserWithCommodity(userId);
+
+		for (int i = 0; i < user.getCommodities().size(); i++) {
+			if(user.getCommodities().get(i).getQuantity() < counters.get(i)){
+				throw new UserException(user.getCommodities().get(i).getName_of_commodity()+" quantity = "
+						+user.getCommodities().get(i).getQuantity()+" but you ordered "+counters.get(i));
+			}
+		}
 
 		Orders orders = new Orders(LocalDate.now());
-
-
-
-
-//		Orders orders = new Orders();
 
 		addressDao.saveAndFlush(address);
 
 		ordersDao.saveAndFlush(orders);
 
-
 		orders.setAddress(address);
 
-
-		User user = userDao.findUserWithCommodity(userId);
 
 		SuitOfDelivery suitOfDelivery = suitOfDeliveryDao.findOne(suit);
 
@@ -102,8 +119,21 @@ public class OrdersServiceImpl implements OrdersService {
 
 		orders.setDescription(description);
 
+		for (int i = 0; i < counters.size(); i++) {
 
-			for (Commodity commodity : user.getCommodities()) {
+			CommodityCounter commodityCounter = new CommodityCounter();
+
+			commodityCounterDao.saveAndFlush(commodityCounter);
+
+			commodityCounter.setOrders(orders);
+
+			commodityCounter.setCommodity(user.getCommodities().get(i));
+
+			commodityCounter.setCounter(counters.get(i));
+		}
+
+
+		for (Commodity commodity : user.getCommodities()) {
 
 			orders.getCommodities().add(commodity);
 
@@ -115,5 +145,24 @@ public class OrdersServiceImpl implements OrdersService {
 		userDao.save(user);
 	}
 
+	@Override
+	public List<Orders> ordersWithCommodities() {
+		return ordersDao.ordersWithCommodities();
+	}
 
+	@Override
+	public List<Orders> ordersWithCommodityCouters() {
+		return ordersDao.ordersWithCommodityCounters();
+	}
+
+	@Override
+	public void orderIsDone(List<Boolean> done) {
+		List<Orders> orders = ordersDao.findAll();
+
+		for (int i = 0; i < done.size(); i++) {
+
+			orders.get(i).setDone(done.get(i));
+			ordersDao.save(orders.get(i));
+		}
+	}
 }

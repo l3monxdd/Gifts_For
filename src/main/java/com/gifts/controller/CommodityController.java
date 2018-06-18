@@ -18,99 +18,103 @@ import java.util.ArrayList;
 
 @Controller
 public class CommodityController {
-	@Autowired
-	private CommodityService commodityService;
+    @Autowired
+    private CommodityService commodityService;
 
-	@Autowired
-	private MeasuringSystemService measuringSystemService;
+    @Autowired
+    private MeasuringSystemService measuringSystemService;
 
-	@GetMapping("/commodity")
-	public String commodity(Model model, @PageableDefault Pageable pageable){
-		model.addAttribute("commodities", commodityService.commodityWithMeasuringSystemPages(pageable));
-		model.addAttribute("measuringSystems", measuringSystemService.findAll());
-		return "views-admin-commodity";
-	}
+    @GetMapping("/commodity")
+    public String commodity(Model model, @PageableDefault Pageable pageable) {
+        model.addAttribute("commodities", commodityService.commodityWithMeasuringSystemPages(pageable));
+        model.addAttribute("measuringSystems", measuringSystemService.findAll());
+        return "views-admin-commodity";
+    }
 
-	@PostMapping("/commodity")
-	public String commodity(@RequestParam String name_of_commodity,
-							@RequestParam double price_id_uan, @RequestParam int quantity,
-							@RequestParam int ms, Model model, @PageableDefault Pageable pageable,
-							@RequestParam MultipartFile image){
-		model.addAttribute("commodities", commodityService.commodityWithMeasuringSystemPages(pageable));
+    @PostMapping("/commodity")
+    public String commodity(@RequestParam String name_of_commodity,
+                            @RequestParam double price_id_uan, @RequestParam int quantity,
+                            @RequestParam int ms, Model model, @PageableDefault Pageable pageable,
+                            @RequestParam MultipartFile image) {
 
-		Commodity commodity = new Commodity(name_of_commodity,quantity,price_id_uan);
+//		if(price_id_uan.replaceAll("[^0-9]", "").isEmpty()){// dew- > ""
+//			return "views-admin-commodity";
+//		}else {
 
-		System.out.println("commodity = " + commodity);
+        model.addAttribute("commodities", commodityService.commodityWithMeasuringSystemPages(pageable));
 
-		try {
-			commodityService.save(commodity, ms, image);
-		}catch (Exception e){
-			if (e.getMessage().equals(CommodityValidatorMessages.EMPTY_NAME_OF_COMMODITY_FIELD) ||
-					e.getMessage().equals(CommodityValidatorMessages.NAME_OF_COMMODITY_ALREADY_EXIST)){
-				model.addAttribute("commodityNameException", e.getMessage());
-			}
+        Commodity commodity = new Commodity(name_of_commodity, quantity, price_id_uan);
 
-			model.addAttribute("measuringSystems", measuringSystemService.findAll());
-			return "views-admin-commodity";
-		}
+        System.out.println("commodity = " + commodity);
 
+        try {
+            commodityService.save(commodity, ms, image);
+        } catch (Exception e) {
+            System.out.println("e = " + e);
+            if (e.getMessage().equals(CommodityValidatorMessages.EMPTY_NAME_OF_COMMODITY_FIELD) ||
+                    e.getMessage().equals(CommodityValidatorMessages.NAME_OF_COMMODITY_ALREADY_EXIST)) {
+                model.addAttribute("commodityNameException", e.getMessage());
+            }
 
-
-		return "redirect:/commodity";
-	}
-
-
-
+            model.addAttribute("measuringSystems", measuringSystemService.findAll());
+            return "views-admin-commodity";
+        }
 
 
-	@GetMapping("/deleteCommodity/{id}")
-	public String deleteCommodity(@PathVariable int id){
-
-		commodityService.delete(id);
-
-		return "redirect:/commodity";
-	}
-
-	@GetMapping("/updateCommodity/{id}")
-	public  String updateCommodity(@PathVariable int id, Model model){
-
-		Commodity commodity =
-				commodityService.findCommoditiesWithMeasuringSystem(id);
+//		}
 
 
-		model.addAttribute("commodity",commodity);
-		model.addAttribute("measuringSystems", measuringSystemService.findAll());
-
-		return "views-admin-updateCommodity";
-	}
+        return "redirect:/commodity";
+    }
 
 
+    @GetMapping("/deleteCommodity/{id}")
+    public String deleteCommodity(@PathVariable int id) {
 
-	@PostMapping("/updateCommodity/{id}")
-	public String updateCommodity(@PathVariable int id,
-								  @RequestParam String name_of_commodity,
-								  @RequestParam int quantity,
-								  @RequestParam double price_id_uan,
-								  @RequestParam MultipartFile image,
-								  @RequestParam int ms){
+        commodityService.delete(id);
 
+        return "redirect:/commodity";
+    }
 
-		Commodity commodity = commodityService.findCommoditiesWithMeasuringSystem(id);
-		commodity.setName_of_commodity(name_of_commodity);
-		commodity.setQuantity(quantity);
-		commodity.setPrice_id_uan(price_id_uan);
+    @GetMapping("/updateCommodity/{id}")
+    public String updateCommodity(@PathVariable int id, Model model) {
 
-		commodityService.update(commodity, image, ms);
-
-		return "redirect:/commodity";
-	}
+        Commodity commodity =
+                commodityService.findCommoditiesWithMeasuringSystem(id);
 
 
-	@GetMapping("/show")
-	public String show(Model model
-	){
-		model.addAttribute("commodities",  commodityService.findAll());
-		return "views-admin-commodity";
-	}
+        model.addAttribute("commodity", commodity);
+        model.addAttribute("measuringSystems", measuringSystemService.findAll());
+
+        return "views-admin-updateCommodity";
+    }
+
+
+    @PostMapping("/updateCommodity/{id}")
+    public String updateCommodity(@PathVariable int id,
+                                  @RequestParam String name_of_commodity,
+                                  @RequestParam int quantity,
+                                  @RequestParam double price_id_uan,
+                                  @RequestParam MultipartFile image,
+                                  @RequestParam int ms) {
+
+
+        Commodity commodity = commodityService.findCommoditiesWithMeasuringSystem(id);
+        commodity.setName_of_commodity(name_of_commodity);
+        commodity.setQuantity(quantity);
+        commodity.setPrice_id_uan(price_id_uan);
+
+        commodityService.update(commodity, image, ms);
+
+        return "redirect:/commodity";
+    }
+
+
+    @GetMapping("/show")
+    public String show(Model model
+    ) {
+        model.addAttribute("commodities", commodityService.findAll());
+        return "views-admin-commodity";
+    }
 
 }

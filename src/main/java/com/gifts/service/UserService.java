@@ -21,6 +21,8 @@ public interface UserService {
 
 	User findByUuid(String uuid);
 
+	User findUserByLoginWithCommodities(String login);
+
 
 
 }

@@ -55,6 +55,11 @@ public class User implements UserDetails {
 		// TODO Auto-generated constructor stub
 	}
 
+	public User(String login, String password) {
+		this.login = login;
+		this.password = password;
+	}
+
 	public User(String login, String firstname, String lastname, String email, String password, String phone_number) {
 		this.login = login;
 		this.firstname = firstname;

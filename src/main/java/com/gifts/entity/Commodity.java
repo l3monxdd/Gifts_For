@@ -18,6 +18,9 @@ public class Commodity {
 
 	private String pathImage;
 
+	@OneToMany(mappedBy = "commodity")
+	private List<CommodityCounter> commodityCounters = new ArrayList<>();
+
 	@ManyToMany
 	@JoinTable(name = "orders_commodity",
 			joinColumns = @JoinColumn(name = "commodity_id"),
@@ -33,6 +36,8 @@ public class Commodity {
 			inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> users = new ArrayList<User>();
 
+
+
 	public Commodity() {
 		// TODO Auto-generated constructor stub
 	}
@@ -46,10 +51,20 @@ public class Commodity {
 
 	}
 
-	public Commodity(String name_of_commodity, int quantity, double price_id_uan) {
+	public Commodity( String name_of_commodity, int quantity, double price_id_uan) {
 		this.name_of_commodity = name_of_commodity;
 		this.quantity = quantity;
 		this.price_id_uan = price_id_uan;
+
+	}
+
+	public Commodity(int id, String name_of_commodity, int quantity, double price_id_uan) {
+		super();
+		this.id = id;
+		this.name_of_commodity = name_of_commodity;
+		this.quantity = quantity;
+		this.price_id_uan = price_id_uan;
+
 	}
 
 	public Commodity(String name_of_commodity) {
@@ -130,11 +145,35 @@ public class Commodity {
 		this.quantity = quantity;
 	}
 
+	public List<CommodityCounter> getCommodityCounters() {
+		return commodityCounters;
+	}
+
+	public void setCommodityCounters(List<CommodityCounter> commodityCounters) {
+		this.commodityCounters = commodityCounters;
+	}
+
 	@Override
 	public String toString() {
 		return "Commodity{" +
 				"name_of_commodity='" + name_of_commodity + '\'' +
 				", price_id_uan=" + price_id_uan +
 				'}';
+	}
+
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Commodity commodity = (Commodity) o;
+
+		return id == commodity.id;
+	}
+
+	@Override
+	public int hashCode() {
+		return id;
 	}
 }

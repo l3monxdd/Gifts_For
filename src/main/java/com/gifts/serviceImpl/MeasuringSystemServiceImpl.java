@@ -2,6 +2,8 @@ package com.gifts.serviceImpl;
 
 import java.util.List;
 
+import com.gifts.dao.CommodityDao;
+import com.gifts.entity.Commodity;
 import com.gifts.validator.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -21,6 +23,9 @@ public class MeasuringSystemServiceImpl implements MeasuringSystemService {
 	@Qualifier("measuringSystemValidator")
 	private Validator validator;
 
+	@Autowired
+	private CommodityDao commodityDao;
+
 	public void save(MeasuringSystem measuringSystem) throws Exception {
 		validator.validate(measuringSystem);
 		measuringSystemDao.save(measuringSystem);
@@ -35,6 +40,11 @@ public class MeasuringSystemServiceImpl implements MeasuringSystemService {
 	}
 
 	public void delete(int id) {
+		MeasuringSystem measuringSystem = measuringSystemDao.findCommodityWithMeasuringSystem(id);
+		for (Commodity commodity : measuringSystem.getCommodities()) {
+			commodity.setMeasuringSystem(null);
+			commodityDao.save(commodity);
+		}
 		measuringSystemDao.delete(id);
 	}
 
